@@ -15,5 +15,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="src/resources/mysql-connector-java-5.1.48.jar"/>
 	<classpathentry kind="src" path="/AT-Chat-war"/>
+	<classpathentry kind="lib" path="jboss-vfs-3.1.0.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

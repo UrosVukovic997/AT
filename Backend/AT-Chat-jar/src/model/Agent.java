@@ -1,5 +1,8 @@
 package model;
 
+import javax.ejb.Stateful;
+
+@Stateful
 public class Agent {
 	
 	private AID id;
