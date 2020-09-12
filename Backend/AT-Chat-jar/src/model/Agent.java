@@ -17,7 +17,7 @@ public class Agent {
 	}
 	
 	
-	private void handleMessage(ACLMessage message) {
+	public  void handleMessage(ACLMessage message) {
 	}
 
 	public AID getId() {

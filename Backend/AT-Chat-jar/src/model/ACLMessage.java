@@ -7,7 +7,7 @@ public class ACLMessage {
 
 	private Performative performative;
 	private AID sender;
-	private List<AID> recievers;
+	private AID[] receivers;
 	private AID replyTo;
 	private String content;
 	private Object contentObj;
@@ -25,13 +25,15 @@ public class ACLMessage {
 		super();
 	}
 
-	public ACLMessage(Performative performative, AID sender, List<AID> recievers, AID replyTo, String content,
+
+
+	public ACLMessage(Performative performative, AID sender, AID[] receivers, AID replyTo, String content,
 			Object contentObj, HashMap<String, Object> userArgs, String language, String encoding, String ontology,
 			String protocol, String conversationId, String replyWith, String inReplyTo, Long replyBy) {
 		super();
 		this.performative = performative;
 		this.sender = sender;
-		this.recievers = recievers;
+		this.receivers = receivers;
 		this.replyTo = replyTo;
 		this.content = content;
 		this.contentObj = contentObj;
@@ -45,6 +47,8 @@ public class ACLMessage {
 		this.inReplyTo = inReplyTo;
 		this.replyBy = replyBy;
 	}
+
+
 
 	public Performative getPerformative() {
 		return performative;
@@ -62,13 +66,18 @@ public class ACLMessage {
 		this.sender = sender;
 	}
 
-	public List<AID> getRecievers() {
-		return recievers;
+
+	public AID[] getReceivers() {
+		return receivers;
 	}
 
-	public void setRecievers(List<AID> recievers) {
-		this.recievers = recievers;
+
+
+	public void setReceivers(AID[] receivers) {
+		this.receivers = receivers;
 	}
+
+
 
 	public AID getReplyTo() {
 		return replyTo;

@@ -1,70 +1,82 @@
 package data;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
-import javax.ejb.AccessTimeout;
-import javax.ejb.ConcurrencyManagement;
-import javax.ejb.ConcurrencyManagementType;
-import javax.ejb.LocalBean;
+import javax.ejb.EJB;
 import javax.ejb.Singleton;
+import javax.ejb.Startup;
 
+import model.Agent;
 import model.AgentCenter;
+import model.AgentType;
+import ws.WSEndPoint;
 
+
+@Startup
 @Singleton
-@LocalBean
-@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
-@AccessTimeout(value = 120000)
 public class NetworkData {
+	@EJB
+	private WSEndPoint ws;
 
-	private List<AgentCenter> nodes = new ArrayList<>();
-	private AgentCenter master;
-	private AgentCenter thisNode;
+	private static ArrayList<AgentType> types = new ArrayList<>();
+	private static ArrayList<AgentCenter> agentskiCentri = new ArrayList<>();
+	private static HashMap<String, Agent> agents = new HashMap<>();
+	public static List<Agent> agenti = new ArrayList<>();
+	
+	static {
 
-	private int counter = 0;
+		AgentType a = new AgentType();
+		a.setModule("abc");
+		a.setName("Ping");
+		types.add(a);
+
+		AgentType a1 = new AgentType();
+		a1.setModule("abc");
+		a1.setName("Pong");
+		types.add(a1);
+
+	}
 	
 	
-	public NetworkData() {}
-
-
-	public List<AgentCenter> getNodes() {
-		return nodes;
+	public WSEndPoint getWs() {
+		return ws;
+	}
+	public void setWs(WSEndPoint ws) {
+		this.ws = ws;
+	}
+	public static ArrayList<AgentType> getTypes() {
+		return types;
+	}
+	public static void setTypes(ArrayList<AgentType> types) {
+		NetworkData.types = types;
+	}
+	public static ArrayList<AgentCenter> getAgentskiCentri() {
+		return agentskiCentri;
+	}
+	public static void setAgentskiCentri(ArrayList<AgentCenter> agentskiCentri) {
+		NetworkData.agentskiCentri = agentskiCentri;
+	}
+	public static HashMap<String, Agent> getAgents() {
+		return agents;
+	}
+	public static void setAgents(HashMap<String, Agent> agents) {
+		NetworkData.agents = agents;
+	}
+	public static List<Agent> getAgenti() {
+		return agenti;
+	}
+	public static void setAgenti(List<Agent> agenti) {
+		NetworkData.agenti = agenti;
 	}
 
 
-	public void setNodes(List<AgentCenter> nodes) {
-		this.nodes = nodes;
-	}
-
-
-	public AgentCenter getMaster() {
-		return master;
-	}
-
-
-	public void setMaster(AgentCenter master) {
-		this.master = master;
-	}
-
-
-	public AgentCenter getThisNode() {
-		return thisNode;
-	}
-
-
-	public void setThisNode(AgentCenter thisNode) {
-		this.thisNode = thisNode;
-	}
-
-
-	public int getCounter() {
-		return counter;
-	}
-
-
-	public void setCounter(int counter) {
-		this.counter = counter;
-	}
-
+	
 
 }
