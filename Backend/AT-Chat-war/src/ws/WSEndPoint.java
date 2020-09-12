@@ -36,7 +36,7 @@ static Map<String, Session> sessions = new ConcurrentHashMap<>();
 	@OnMessage
 	public void echoTextMessage(String msg) {
 		
-		Gson g = new Gson();		
+		Gson g = new Gson();
 		Message message = g.fromJson(msg, Message.class);
 		MessageData.getInstance().getMessages().add(message);
 		if (message.getReceiver().equals("All")) {

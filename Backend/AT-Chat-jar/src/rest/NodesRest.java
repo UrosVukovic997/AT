@@ -1,6 +1,8 @@
 package rest;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -21,7 +23,10 @@ import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
 import org.jboss.resteasy.client.jaxrs.ResteasyWebTarget;
 
+import com.google.gson.Gson;
+
 import data.NetworkData;
+import model.Agent;
 import model.AgentCenter;
 import model.AgentType;
 import ws.WSEndPoint;
@@ -148,7 +153,7 @@ public class NodesRest {
 			database.getTypes().add(a);
 		return;
 	}
-/*
+
 	@POST
 	@Path("/agents/running")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -163,25 +168,17 @@ public class NodesRest {
 			}
 		}
 			
-			ObjectMapper mapper = new ObjectMapper();
-			String msg = null;
-			try {
-				msg = mapper.writeValueAsString(database.getAgents().values());
-			} catch (JsonGenerationException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JsonMappingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			String msg = "";
+			Gson gson = new Gson();
+			for(Agent a : database.getAgents().values()) {
+				msg += gson.toJson(a);
 			}
+
 			ws.echoTextMessage(msg);
 		
 		return Response.status(200).build();
 	}
-*/
+
 	@DELETE
 	@Path("/node/{alias}")
 	@Consumes(MediaType.APPLICATION_JSON)

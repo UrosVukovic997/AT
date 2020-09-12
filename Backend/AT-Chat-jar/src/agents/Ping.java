@@ -2,6 +2,7 @@ package agents;
 
 import javax.ejb.Stateful;
 
+import jms.JMSQueue;
 import model.ACLMessage;
 import model.AID;
 import model.Agent;
@@ -20,7 +21,7 @@ public class Ping extends Agent {
 			aclPoruka.setConversationId(message.getConversationId());
 			aclPoruka.setPerformative(Performative.INFORM);
 			aclPoruka.setContent("vratio");
-			// JMSQueue(aclPoruka);
+			new JMSQueue(aclPoruka);
 		} else if (message.getPerformative().equals(Performative.INFORM)) {
 			System.out.println("Pong has responded, awesome.");
 		}

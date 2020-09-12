@@ -1,10 +1,15 @@
 package model;
 
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
-public class ACLMessage {
+public class ACLMessage implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3361292564375550883L;
 	private Performative performative;
 	private AID sender;
 	private AID[] receivers;
@@ -46,6 +51,19 @@ public class ACLMessage {
 		this.replyWith = replyWith;
 		this.inReplyTo = inReplyTo;
 		this.replyBy = replyBy;
+	}
+	
+	public ACLMessage(ACLMessage copy, int reciver) {
+		this.setSender(copy.getSender());
+		this.setReceivers(new AID[] { copy.getReceivers()[reciver] });
+		this.setContent(copy.getContent());
+		this.setContentObj(copy.getContentObj());
+		this.setConversationId(copy.getConversationId());
+		this.setPerformative(copy.getPerformative());
+		this.setProtocol(copy.getProtocol());
+		this.setEncoding(copy.getEncoding());
+		this.setReplyTo(copy.getReplyTo());
+		this.setUserArgs(copy.getUserArgs());;
 	}
 
 
@@ -175,5 +193,12 @@ public class ACLMessage {
 		this.replyBy = replyBy;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "ACLPoruka [performative=" + performative + ", sender=" + sender + ", receivers="
+				+ Arrays.toString(receivers) + ", replyTo=" + replyTo + ", content=" + content + ", contentObj="
+				+ contentObj + ", userArgs=" + userArgs + ", language=" + language + ", encoding=" + encoding
+				+ ", ontology=" + ontology + ", protocol=" + protocol + ", conversationId=" + conversationId
+				+ ", replyWith=" + replyWith + ", inReplyTo=" + inReplyTo + ", replyBy=" + replyBy + "]";
+	}
 }

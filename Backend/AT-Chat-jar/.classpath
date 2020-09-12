@@ -16,8 +16,6 @@
 	<classpathentry kind="lib" path="src/resources/mysql-connector-java-5.1.48.jar"/>
 	<classpathentry kind="src" path="/AT-Chat-war"/>
 	<classpathentry kind="lib" path="jboss-vfs-3.1.0.Final.jar"/>
-	<classpathentry kind="lib" path="/AT-Chat-war/build/jackson-mrbean-1.9.13.jar"/>
-	<classpathentry kind="lib" path="/AT-Chat-war/build/jackson-core-asl-1.9.13.jar"/>
-	<classpathentry kind="lib" path="/AT-Chat-war/build/jackson-mapper-asl-1.9.13.jar"/>
+	<classpathentry kind="lib" path="/AT-Chat-war/WebContent/WEB-INF/lib/gson-2.8.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
