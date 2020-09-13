@@ -14,8 +14,20 @@ export class NewVehicleComponent implements OnInit {
   performatives: any = [];
   senders: any = [];
   receivers: any = [];
+  text = '';
 
   constructor(private vehicleService: VehicleService, private formBuilder: FormBuilder) {
+
+    vehicleService.messages.subscribe(msg => {
+      let tmp = '';
+      for (const rec of msg.receivers){
+        tmp += rec.name + '(' + rec.type.name + '),';
+      }
+      console.log(msg.performative + ' from: ' + msg.sender.name + '(' + msg.sender.type.name + ') to: ' + tmp
+        + ' content: ' + msg.content);
+      this.text += msg.performative + ' from: ' + msg.sender.name + '(' + msg.sender.type.name + ') to: ' + tmp
+        + ' content: ' + msg.content + '\n';
+    });
   }
 
   ngOnInit(): void {

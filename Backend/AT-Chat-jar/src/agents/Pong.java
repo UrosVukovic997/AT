@@ -13,13 +13,13 @@ public class Pong extends Agent {
 
 	@Override
 	public void handleMessage(ACLMessage message) {
-		System.out.println("Pong has rcived message, well see what it does. " + message);
+		System.out.println("Pong has recived messages:" + message);
 		if (message.getPerformative().equals(Performative.REQUEST)) {
 			ACLMessage aclPoruka = new ACLMessage();
 			aclPoruka.setSender(this.getId());
 			aclPoruka.setReceivers(new AID[] { message.getSender() });
 			aclPoruka.setConversationId(message.getConversationId());
-			aclPoruka.setContent("vratio");
+			aclPoruka.setContent("Pong je odgovorio");
 			aclPoruka.setPerformative(Performative.INFORM);
 			new JMSQueue(aclPoruka);
 		}

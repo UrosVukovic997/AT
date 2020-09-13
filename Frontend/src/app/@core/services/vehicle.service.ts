@@ -1,15 +1,40 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable} from 'rxjs';
+import {Observable, Subject} from 'rxjs';
 import {Ad} from '../model/Ad';
+import {LoginService} from './login.service';
+import {map} from 'rxjs/operators';
+
+const CHAT_URL = 'ws://localhost:8080/AT-Chat-war/wsMessage';
+
+export interface Message {
+  receivers: any[];
+  sender: any;
+  performative: string;
+  content: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
+  public messages: Subject<Message>;
+  constructor(private http: HttpClient, private service: LoginService) {
 
-  constructor(private http: HttpClient) { }
 
+    this.messages = (service.connect(CHAT_URL).pipe(map(
+      (response: MessageEvent): Message => {
+        const data = JSON.parse(response.data);
+        return {
+          receivers: data.receivers,
+        sender: data.sender,
+        performative: data.performative,
+        content: data.content
+        };
+      }
+    )) as Subject<any>);
+
+  }
   getAllVendors(): Observable<any> {
     return this.http.get<any>('http://localhost:8080/AT-Chat-war/rest/messages');
   }

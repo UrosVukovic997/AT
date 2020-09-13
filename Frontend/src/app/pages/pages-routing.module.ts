@@ -30,7 +30,7 @@ const routes: Routes = [{
       component: NewAdComponent,
     },
     {
-      path: 'new-vehicle',
+      path: 'pingpong',
       component: NewVehicleComponent,
     },
     {
