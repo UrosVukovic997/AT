@@ -15,10 +15,8 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.ObjectMessage;
-import javax.websocket.Session;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-
 
 import org.jboss.resteasy.client.jaxrs.ResteasyClient;
 import org.jboss.resteasy.client.jaxrs.ResteasyClientBuilder;
@@ -31,7 +29,7 @@ import model.ACLMessage;
 import model.AID;
 import model.Agent;
 import model.AgentCenter;
-import ws.WSEndPoint;
+import ws.UserEndPoint;
 
 
 @MessageDriven(activationConfig = {
@@ -41,7 +39,7 @@ import ws.WSEndPoint;
 public class MDBConsumer implements MessageListener {
 
 	@EJB
-	WSEndPoint ws;
+	UserEndPoint ws;
 
 	@EJB
 	NetworkData database;
@@ -52,6 +50,8 @@ public class MDBConsumer implements MessageListener {
 		ObjectMessage msg = (ObjectMessage) arg0;
 		System.out.println("uso");
 		try {
+			System.out.println("uso2");
+
 			ACLMessage acl = (ACLMessage) msg.getObject();
 			String currentIp = "";
 			BufferedReader br = null;
@@ -90,6 +90,7 @@ public class MDBConsumer implements MessageListener {
 
 				}
 			}
+			System.out.println("Lista velicina: " + lista.size());
 			for (int i = 0; i < lista.size(); i++) {
 
 				System.out.println(lista.get(i).getId().getHost().getAddress());
@@ -106,7 +107,7 @@ public class MDBConsumer implements MessageListener {
 					ACLMessage acln1 = new ACLMessage(acl, i);
 					ResteasyClient client = new ResteasyClientBuilder().build();
 					ResteasyWebTarget target = client
-							.target(lista.get(i).getId().getHost().getAddress() + "/ATProjectWAR/rest/messages");
+							.target(lista.get(i).getId().getHost().getAddress() + "/AT-Chat-war/rest/messages");
 					target.request(MediaType.APPLICATION_JSON).post(Entity.entity(acln1, MediaType.APPLICATION_JSON));
 				}
 			}

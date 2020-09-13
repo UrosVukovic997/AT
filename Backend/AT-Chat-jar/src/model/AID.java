@@ -1,7 +1,13 @@
 package model;
 
-public class AID {
+import java.io.Serializable;
 
+public class AID implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7463847361620913219L;
 	private String name;
 	private AgentCenter host;
 	private AgentType type;

@@ -92,7 +92,7 @@ public class AuthBean {
         if (userFound != null) {
         	UsersData.getInstance().logout(userFound);
         	System.out.println("Uspesno izlogovan");
-        	uep.close(user.getUsername());
+        //	uep.close(user.getUsername());
         }
 
     }

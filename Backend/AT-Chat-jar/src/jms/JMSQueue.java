@@ -21,9 +21,11 @@ public class JMSQueue {
 					.lookup("java:jboss/exported/jms/RemoteConnectionFactory");
 			final Queue queue = (Queue) context.lookup("java:jboss/exported/jms/queue/mojQueue");
 			context.close();
+			System.out.println("Doslo do konekcije, ne konektuje");
 
 			Connection connection = cf.createConnection("guest", "guest.guest.1");
 			final Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			System.out.println("Doslo do konekcije, konektuje");
 
 			connection.start();
 

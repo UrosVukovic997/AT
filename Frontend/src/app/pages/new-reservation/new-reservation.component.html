@@ -1,0 +1,37 @@
+<nb-card>
+  <nb-card-header>
+    Done deals
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings1" [source]="source1" (custom)="onReserve($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<nb-card>
+  <nb-card-header>
+    Arhived
+  </nb-card-header>
+
+  <nb-card-body>
+    <ng2-smart-table [settings]="settings2" [source]="source2">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>
+
+<ng-template #disabledEsc>
+  <form [formGroup]="ReerveForm" (ngSubmit)="submit()">
+    <div class="full-name-inputs">
+      <div class="form-group">
+        <label for="opis">Opis</label>
+        <input type="text" id="opis"  nbInput fullWidth formControlName="opis">
+      </div>
+      <div class="form-group">
+        <label for="predjenaKM">KM: </label>
+        <input type="text" id="predjenaKM"  nbInput fullWidth formControlName="predjenaKM">
+      </div>
+    </div>
+    <button type="submit" nbButton status="primary">Send</button>
+  </form>
+</ng-template>

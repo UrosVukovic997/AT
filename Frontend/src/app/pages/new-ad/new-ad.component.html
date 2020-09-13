@@ -1,0 +1,22 @@
+<nb-card>
+  <nb-card-header>Create new agent</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="AdForm" (ngSubmit)="submit()">
+      <label class="label" for="agent">Agent type: </label>
+        <nb-select formControlName="agent" id="agent" placeholder="Choose vehicle">
+          <nb-option value="Ping">Ping</nb-option>
+          <nb-option value="Pong">Pong</nb-option>
+          <nb-option value="Initiator">Initiator</nb-option>
+          <nb-option value="Participant">Participant</nb-option>
+        </nb-select>
+      <br>
+      <div class="full-name-inputs">
+        <label  for="name">Name:  </label>
+        <input formControlName="name" type="text" id="name" nbInput  placeholder="">
+      </div>
+      <button type="submit" nbButton status="primary">Save</button>
+    </form>
+  </nb-card-body>
+</nb-card>
+
+

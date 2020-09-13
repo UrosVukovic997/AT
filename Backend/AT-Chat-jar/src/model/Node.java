@@ -33,7 +33,7 @@ import data.NetworkData;
 @Path("/")
 public class Node {
 	private String currentIp;
-	private String masterIp = "http://56e70053edca.ngrok.io";
+	private String masterIp = "http://c57d25d312c4.ngrok.io";
 	@EJB
 	NetworkData database;
 
@@ -45,7 +45,7 @@ public class Node {
 					continue;
 				
 				ResteasyClient client5 = new ResteasyClientBuilder().build();
-				ResteasyWebTarget rtarget5 = client5.target(at.getAddress() + "/ATProjectWAR/rest/node/node");
+				ResteasyWebTarget rtarget5 = client5.target(at.getAddress() + "/AT-Chat-war/rest/node/node");
 				
 				try {
 					System.out.println(at.getAddress() + "--------HB1");
@@ -68,7 +68,7 @@ public class Node {
 							ResteasyWebTarget rtargetDelete = clientDelete.target(this.masterIp
 									+ "/ATProjectWAR/rest/agents/running/" + del);
 							Response responseDelete = rtargetDelete.request().delete();
-							System.out.println(this.masterIp+ "/ATProjectWAR/rest/agents/running/" + del+" -->"+responseDelete.getStatus());
+							System.out.println(this.masterIp+ "/AT-Chat-war/rest/agents/running/" + del+" -->"+responseDelete.getStatus());
 							
 							database.setAgentskiCentri((ArrayList<AgentCenter>) currentAT);
 							for (AgentCenter atDelete : database.getAgentskiCentri()) {
@@ -77,7 +77,7 @@ public class Node {
 								System.out.println("DELETE");
 								ResteasyClient client6 = new ResteasyClientBuilder().build();
 								ResteasyWebTarget rtarget6 = client6.target(atDelete.getAddress()
-										+ "/ATProjectWAR/rest/node/node/" + at.getAddress());
+										+ "/AT-Chat-war/rest/node/node/" + at.getAddress());
 								Response response6 = rtarget6.request(MediaType.APPLICATION_JSON).delete();
 								
 								
@@ -93,7 +93,7 @@ public class Node {
 			}
 
 			try {
-				TimeUnit.SECONDS.sleep(10);
+				TimeUnit.SECONDS.sleep(20);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -104,7 +104,7 @@ public class Node {
 	Runnable task = () -> {
 
 		try {
-			TimeUnit.SECONDS.sleep(2);
+			TimeUnit.SECONDS.sleep(5);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -156,7 +156,7 @@ public class Node {
 		// – nov ne-master cvor kontaktira master cvor koji ga registruje
 		ResteasyClient client = new ResteasyClientBuilder().build();
 		AgentCenter a = new AgentCenter("8080", connection);
-		ResteasyWebTarget rtarget = client.target(masterIp + "/ATProjectWAR/rest/node/register");
+		ResteasyWebTarget rtarget = client.target(masterIp + "/AT-Chat-war/rest/node/register");
 		Response response = rtarget.request(MediaType.APPLICATION_JSON)
 				.post(Entity.entity(a, MediaType.APPLICATION_JSON));
 		return;

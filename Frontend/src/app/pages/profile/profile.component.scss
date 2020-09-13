@@ -1,0 +1,16 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+.profile input[type="submit"] {
+  background: rgb(1, 29, 51);
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.profile input[type="submit"]:hover {
+  background: #17c;
+}
+
+.profile input[type="submit"]:focus {
+  border-color: #05a;
+}

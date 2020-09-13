@@ -1,0 +1,46 @@
+<nb-card>
+  <nb-card-header>Ping-Pong</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="VehicleForm" class="new-vehicle-form" (ngSubmit)="submit()">
+    <div class="full-name-inputs">
+
+            <label for="performative">Performative: </label>
+           <nb-select id="performative" formControlName="performative" placeholder="Choose performative">
+             <nb-option *ngFor="let performative of performatives" [value]="performative">{{ performative }}</nb-option>
+            </nb-select>
+
+      <label for="sender">Sender: </label>
+      <nb-select id="sender" formControlName="sender" placeholder="Please select sender">
+        <nb-option *ngFor="let sender of senders" [value]="sender.id">{{ sender.id.name + '@' +  sender.id.type.name}}</nb-option>
+      </nb-select>
+
+      <div>
+        <label for="receivers">Receivers:  </label>
+        <mat-form-field >
+          <mat-label>Receivers</mat-label>
+          <mat-select formControlName="receivers" multiple>
+            <mat-option id="receivers"  *ngFor="let klasa of receivers" [value]="klasa.id">{{klasa.id.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <!--
+        <label for="receivers">Recivers: </label>
+        <nb-select id="receivers"  placeholder="Please select receivers">
+          <nb-option *ngFor="let receiver of receivers" [value]="receiver.id">{{ receiver.id.name + '@' +  receiver.id.type.name }}</nb-option>
+        </nb-select>
+        -->
+    </div>
+      <br>
+
+    <div class="full-name-inputs">
+      <label for="content">Content:  </label>
+      <input nbInput type="text" formControlName="content" id="content"  placeholder="Content">
+      <label for="contentObj">contentObj:  </label>
+      <input nbInput type="text" id="contentObj"  placeholder="contentObj">
+
+    </div>
+      <br>
+      <button type="submit" nbButton status="primary">Send</button>
+    </form>
+  </nb-card-body>
+</nb-card>
