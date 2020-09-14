@@ -20,7 +20,7 @@ export class NewVehicleComponent implements OnInit {
 
     vehicleService.messages.subscribe(msg => {
       let tmp = '';
-      for (const rec of msg.receivers){
+      for (const rec of msg.receivers) {
         tmp += rec.name + '(' + rec.type.name + '),';
       }
       console.log(msg.performative + ' from: ' + msg.sender.name + '(' + msg.sender.type.name + ') to: ' + tmp
@@ -29,7 +29,6 @@ export class NewVehicleComponent implements OnInit {
         + ' content: ' + msg.content + '\n';
     });
   }
-
   ngOnInit(): void {
 
   this.VehicleForm  =  this.formBuilder.group({

@@ -6,6 +6,7 @@ import {LoginService} from './login.service';
 import {map} from 'rxjs/operators';
 
 const CHAT_URL = 'ws://localhost:8080/AT-Chat-war/wsMessage';
+const AGENT_URL = 'ws://localhost:8080/AT-Chat-war/ws';
 
 export interface Message {
   receivers: any[];
@@ -14,11 +15,16 @@ export interface Message {
   content: string;
 }
 
+export interface UserEvent {
+  id: any[];
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class VehicleService {
   public messages: Subject<Message>;
+  public agents: Subject<UserEvent>;
   constructor(private http: HttpClient, private service: LoginService) {
 
 
@@ -34,6 +40,14 @@ export class VehicleService {
       }
     )) as Subject<any>);
 
+    this.agents = (service.connectOnline(AGENT_URL).pipe(map(
+      (response: MessageEvent): UserEvent => {
+        // const data = JSON.parse(response.data);
+        return {
+          id: response.data
+        };
+      }
+    )) as Subject<UserEvent>);
   }
   getAllVendors(): Observable<any> {
     return this.http.get<any>('http://localhost:8080/AT-Chat-war/rest/messages');

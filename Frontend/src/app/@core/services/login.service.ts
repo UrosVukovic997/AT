@@ -8,8 +8,10 @@ import {JWT} from '../model/LogedUserData';
 })
 export class LoginService {
   private subject: Subject<MessageEvent>;
+  private subject2: Subject<MessageEvent>;
 
   private ws1: WebSocket;
+  private ws2: WebSocket;
   constructor(private http: HttpClient) {
   }
 
@@ -35,13 +37,21 @@ export class LoginService {
 
   public connect(url): Subject<MessageEvent> {
     if (!this.subject) {
-      this.subject = this.create(url);
+      this.subject = this.create(url, 0);
       console.log('Successfully connected: ' + url);
     }
     return this.subject;
   }
 
-  private create(url): Subject<MessageEvent> {
+  public connectOnline(url): Subject<MessageEvent> {
+    if (!this.subject2) {
+      this.subject2 = this.create(url, 1);
+      console.log('Successfully connected: ' + url);
+    }
+    return this.subject2;
+  }
+
+  private create(url, i): Subject<MessageEvent> {
     const ws = new WebSocket(url);
 
     const observable = Observable.create((obs: Observer<MessageEvent>) => {
@@ -58,7 +68,12 @@ export class LoginService {
         }
       }
     };
-    this.ws1 = ws;
+    if (i){
+      this.ws2 = ws;
+    }
+    else {
+      this.ws1 = ws;
+    }
 
     return Subject.create(observer, observable);
   }

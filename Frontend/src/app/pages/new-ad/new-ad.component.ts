@@ -19,7 +19,10 @@ export class NewAdComponent implements OnInit {
   public message: string;
   selectedFiles: Blob[] = [];
 
-  constructor(private formBuilder: FormBuilder, private adService: MyAdsService) {
+  constructor(private formBuilder: FormBuilder, private adService: MyAdsService, private vehicleService: VehicleService) {
+    vehicleService.agents.subscribe(msg => {
+      console.log(msg);
+    });
   }
 
   ngOnInit(): void {
