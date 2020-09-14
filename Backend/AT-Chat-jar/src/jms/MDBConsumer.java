@@ -48,9 +48,9 @@ public class MDBConsumer implements MessageListener {
 	public void onMessage(Message arg0) {
 		// TODO Auto-generated method stub
 		ObjectMessage msg = (ObjectMessage) arg0;
-		System.out.println("uso");
+		System.out.println("MDBC pristup");
 		try {
-			System.out.println("uso2");
+			System.out.println("MDBC2");
 
 			ACLMessage acl = (ACLMessage) msg.getObject();
 			String currentIp = "";

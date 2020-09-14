@@ -39,7 +39,7 @@ public class Node {
 
 	Runnable heartbeat = () -> {
 		while (true) {
-			System.out.println("Koliko ih ima :" + database.getAgentskiCentri().size());
+			System.out.println("Broj uvezanih cvorova :" + database.getAgentskiCentri().size());
 			for (AgentCenter at : database.getAgentskiCentri()) {
 				if (at.getAddress().equals(this.currentIp))
 					continue;
@@ -56,7 +56,7 @@ public class Node {
 							response5 = rtarget5.request().get();
 							
 						} catch (Exception e1) {	
-							System.out.println("Umro je " + at.getAddress());
+							System.out.println("Umro je cvor: " + at.getAddress());
 							List<AgentCenter> currentAT = new ArrayList<>();
 							for(AgentCenter a : database.getAgentskiCentri()) {
 								if(!a.getAddress().equals(at.getAddress())) {

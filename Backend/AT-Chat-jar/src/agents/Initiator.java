@@ -24,7 +24,7 @@ public class Initiator extends Agent{
 		case REQUEST: // client initiated, sends cpf to all running participant agents
 			System.out.println("Initiator agent got first message: " + poruka.getContent());
 			handleRequest(poruka);
-			waitForParticipans(poruka, 5);
+			 waitForParticipans(poruka, 5);
 			break;
 
 		case RESUME:
@@ -37,7 +37,7 @@ public class Initiator extends Agent{
 
 		case PROPOSE:
 			handlePropose(poruka);
-			waitForParticipans(poruka, 5);
+			 waitForParticipans(poruka, 5);
 
 			break;
 

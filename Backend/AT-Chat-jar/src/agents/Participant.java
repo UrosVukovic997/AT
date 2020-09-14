@@ -42,17 +42,6 @@ public class Participant extends Agent{
 		}
 		
 		
-		/*
-		System.out.println("Participant je primio poruku. " + poruka);
-		if (poruka.getPerformative().equals(Performative.REQUEST)) {
-			ACLPoruka aclPoruka = new ACLPoruka();
-			aclPoruka.setSender(this.getId());
-			aclPoruka.setReceivers(new AID[] { poruka.getSender() });
-			aclPoruka.setConversationId(poruka.getConversationId());
-			aclPoruka.setContent("vratio");
-			aclPoruka.setPerformative(Performative.INFORM);
-			new JMSQueue(aclPoruka);
-		}*/
 	}
 	
 	private void handleAcceptance(ACLMessage poruka) {
